@@ -43,10 +43,10 @@ public class OpenTSPSUnityListener : MonoBehaviour  {
 		string address = message.Address;
 		ArrayList args = message.Values;
 		
-		if (address == "/TSPS/personEntered/") {
+		if (address == "TSPS/personEntered/") {
 			addPerson(args);
 		}
-		else if(address == "/TSPS/personUpdated/"){				
+		else if(address == "TSPS/personMoved/"){				
 			int person_id = (int)args[0];
 			Person person = null;
 			if (!people.ContainsKey(person_id)) {
@@ -59,7 +59,7 @@ public class OpenTSPSUnityListener : MonoBehaviour  {
 				BroadcastMessage("PersonUpdated", person, SendMessageOptions.DontRequireReceiver);
 			}
 		}
-		else if(address == "/TSPS/personWillLeave/"){
+		else if(address == "TSPS/personWillLeave/"){
 			int person_id = (int)args[0];
 			if (people.ContainsKey(person_id)) {
 				Person personToRemove = people[person_id];				
@@ -81,18 +81,18 @@ public class OpenTSPSUnityListener : MonoBehaviour  {
 	
 	private void updatePerson(Person person, ArrayList args) {
 		person.id = (int)args[0];
-		person.oid = (int)args[1];
-		person.age = (int)args[2];
-		person.centroidX = (float)args[3];
-		person.centroidY = (float)args[4];
-		person.velocityX = (float)args[5];
-		person.velocityY = (float)args[6];
-		person.boundingRectOriginX = (float)args[7];
-		person.boundingRectOriginY = (float)args[8];
-		person.boundingRectSizeWidth = (float)args[9];
-		person.boundingRectSizeHeight = (float)args[10];
-		person.opticalFlowVelocityX = (float)args[11];
-		person.opticalFlowVelocityY = (float)args[12];			
+//		person.oid = (int)args[1];
+		person.age = (int)args[1];
+		person.centroidX = (float)args[2];
+		person.centroidY = (float)args[3];
+		person.velocityX = (float)args[4];
+		person.velocityY = (float)args[5];
+		person.boundingRectOriginX = (float)args[6];
+		person.boundingRectOriginY = (float)args[7];
+		person.boundingRectSizeWidth = (float)args[8];
+		person.boundingRectSizeHeight = (float)args[9];
+		person.opticalFlowVelocityX = (float)args[10];
+		person.opticalFlowVelocityY = (float)args[11];			
 		
 		//TODO: Track contours and add them to the person object
 		//if (m->getNumArgs() > 12){
